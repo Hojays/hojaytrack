@@ -281,7 +281,7 @@ export default function Home() {
         isClockedIn={isClockedIn}
         onClockOutClick={() => setAppState("clock-out")}
       />
-      <main className="min-h-screen lg:ml-64">
+      <main className="min-h-screen lg:ml-64 overflow-y-auto">
         <div className="h-16 lg:hidden" aria-hidden="true" />
         <div className="p-4 sm:p-6 lg:p-8">
           {renderContent()}

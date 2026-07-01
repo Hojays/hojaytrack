@@ -91,7 +91,7 @@ export function Sidebar({ activeView, onViewChange, user, onSignOut, isClockedIn
       <Separator className="bg-sidebar-border" />
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-4" aria-label="Main navigation">
+      <nav className="flex-1 overflow-y-auto px-3 py-4" aria-label="Main navigation">
         <div className="mb-2 px-3 text-xs font-medium uppercase tracking-wider text-sidebar-foreground/50">
           Navigation
         </div>
@@ -215,7 +215,7 @@ export function Sidebar({ activeView, onViewChange, user, onSignOut, isClockedIn
       {/* Sidebar - Fixed on desktop, slides in on mobile */}
       <aside
         className={cn(
-          "flex h-screen flex-col bg-sidebar text-sidebar-foreground transition-transform duration-300 ease-in-out",
+          "flex h-screen flex-col bg-sidebar text-sidebar-foreground transition-transform duration-300 ease-in-out overflow-y-auto",
           isMobile
             ? cn(
                 "fixed left-0 top-0 z-50 w-72 pt-16",

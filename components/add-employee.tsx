@@ -27,6 +27,8 @@ import {
   Clock,
   CalendarClock,
   Download,
+  Eye,
+  EyeOff,
 } from "lucide-react"
 import { DashboardHeader } from "@/components/dashboard-header"
 
@@ -103,6 +105,9 @@ export function AddEmployee() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
   const [role, setRole] = useState<Role>("employee")
   const [department, setDepartment] = useState("")
   const [employeeId, setEmployeeId] = useState("")
@@ -588,18 +593,40 @@ export function AddEmployee() {
                                   <p className="text-xs text-success">{passwordSuccess}</p>
                                 )}
                                 <div className="grid gap-2 sm:grid-cols-2">
-                                  <Input
-                                    type="password"
-                                    placeholder="Current password"
-                                    value={currentPassword}
-                                    onChange={(e) => setCurrentPassword(e.target.value)}
-                                  />
-                                  <Input
-                                    type="password"
-                                    placeholder="New password (8+ chars, letters & numbers)"
-                                    value={newPassword}
-                                    onChange={(e) => setNewPassword(e.target.value)}
-                                  />
+                                  <div className="relative">
+                                    <Input
+                                      type={showCurrentPassword ? "text" : "password"}
+                                      placeholder="Current password"
+                                      value={currentPassword}
+                                      onChange={(e) => setCurrentPassword(e.target.value)}
+                                      className="pr-10"
+                                    />
+                                    <button
+                                      type="button"
+                                      onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus:outline-none"
+                                      aria-label={showCurrentPassword ? "Hide password" : "Show password"}
+                                    >
+                                      {showCurrentPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                                    </button>
+                                  </div>
+                                  <div className="relative">
+                                    <Input
+                                      type={showNewPassword ? "text" : "password"}
+                                      placeholder="New password (8+ chars, letters & numbers)"
+                                      value={newPassword}
+                                      onChange={(e) => setNewPassword(e.target.value)}
+                                      className="pr-10"
+                                    />
+                                    <button
+                                      type="button"
+                                      onClick={() => setShowNewPassword(!showNewPassword)}
+                                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus:outline-none"
+                                      aria-label={showNewPassword ? "Hide password" : "Show password"}
+                                    >
+                                      {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                                    </button>
+                                  </div>
                                 </div>
                                 <Button
                                   size="sm"
@@ -746,15 +773,26 @@ export function AddEmployee() {
 
               <div className="space-y-1.5">
                 <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  minLength={8}
-                  placeholder="At least 8 characters, with letters and numbers"
-                />
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    minLength={8}
+                    placeholder="At least 8 characters, with letters and numbers"
+                    className="pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus:outline-none"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
                 <p className="text-xs text-muted-foreground">
                   Share this with them directly — there's no email/reset flow yet, so this is the password they'll log in with.
                 </p>
